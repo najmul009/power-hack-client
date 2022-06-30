@@ -11,7 +11,7 @@ module.exports = {
       {
         experstheme: {
           primary: "#0C0634",
-          secondary: "#1B1B1B",
+          secondary: "#ffffff",
           accent: "#3A4256",
           neutral: "#2eaed3",
           "base-100": "#ffffff",
