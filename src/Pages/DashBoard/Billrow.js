@@ -8,7 +8,7 @@ const Billrow = ({ bill, index, refetch }) => {
     
     }
     return (
-        <tr className="hover">
+        <tr className="hover table-data hover:text-black">
             <th>{index + 1}</th>
             <td>{_id}</td>
             <td>{name}</td>
