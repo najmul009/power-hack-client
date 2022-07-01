@@ -12,8 +12,10 @@ module.exports = {
         experstheme: {
           primary: "#0C0634",
           secondary: "#ffffff",
-          accent: "#3A4256",
+          accent: "#122333",
           neutral: "#2eaed3",
+          "cardColor": "#182B3C",
+          headColor: "#1E384E",
           "base-100": "#ffffff",
           "me-100":"#000000"
         },

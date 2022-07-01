@@ -4,7 +4,7 @@ import logo from '../../assets/logo.JPG'
 const Header = () => {
     
     return (
-        <div className="navbar  lg:px-20 pt-5 bg-primary text-white h-24">
+        <div className="navbar  lg:px-20 bg-primary text-white ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -18,7 +18,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <Link to='/' className="normal-case text-xl">
-                    <img width={200}  src={logo} alt="" />
+                    <img width={180}  src={logo} alt="" />
                 </Link>
             </div>
             <div className=" navbar-center  hidden lg:flex">
