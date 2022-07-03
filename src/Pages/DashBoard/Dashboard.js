@@ -3,18 +3,28 @@ import { useQuery } from 'react-query';
 import Billrow from './Billrow';
 import { ReactComponent as Plus } from '../../assets/Plus_icon.svg';
 import BillModal from './BillModal';
+import ReactPaginate from 'react-paginate';
 
 const Dashboard = () => {
+    const [pageCount, setPageCount] = useState(0)
     const [billModal, setBillModal] = useState(false);
 
     const { isLoading, error, data, refetch } = useQuery(['biils'], () =>
-        fetch(`http://localhost:5000/billing-list`)
+        fetch(`https://flannel-beaver-14431.herokuapp.com/billing-list`)
             .then(res => res.json())
     );
-    const newData = data?.slice(0, 10)
-    console.log(newData);
+    console.log(data);
 
-  
+    let viewData;
+    if (data) {
+        const newData = [...data]
+        const currentData = newData?.reverse().slice(0, 10)
+        viewData = currentData
+    }
+
+    const handlePageClick = (data) => {
+        console.log(data.selected);
+    }
     return (
         <div className=' mx-20 '>
 
@@ -36,7 +46,7 @@ const Dashboard = () => {
 
             </div>
 
-            <div className="overflow-x-auto shadow-xl">
+            <div className="overflow-x-auto shadow-xl ">
                 <table className="table w-full ">
                     <thead>
                         <tr className='mark table-head '>
@@ -45,14 +55,14 @@ const Dashboard = () => {
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Phone </th>
-                            <th>Paid Amount </th>
+                            <th>Amount </th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            newData?.map((bill, index) => <Billrow
+                            viewData?.map((bill, index) => <Billrow
                                 key={bill._id}
                                 index={index}
                                 bill={bill}
@@ -66,19 +76,29 @@ const Dashboard = () => {
                 </table>
             </div>
 
-
-            <div class="btn-group py-5 flex justify-center">
-                <button class="btn">1</button>
-                <button class="btn btn-active">2</button>
-                <button class="btn">3</button>
-                <button class="btn">4</button>
+            {/* pagination */}
+            <div className='py-5'>
+                <ReactPaginate
+                    previousLabel={"previous"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    pageCount={10}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={3}
+                    onPageChange={handlePageClick}
+                    containerClassName={"btn-group flex justify-center"}
+                    pageClassName={"btn"}
+                    previousClassName={"btn btn-outline btn-info"}
+                    nextClassName={"btn btn-outline btn-info"}
+                    breakClassName={"btn"}
+                    activeClassName={"btn btn-active"}
+                />
             </div>
 
-
-
+            {/* modal  */}
             {
-                billModal  && <BillModal
-                setBillModal={setBillModal}
+                billModal && <BillModal
+                    setBillModal={setBillModal}
                 ></BillModal>
 
             }

@@ -1,29 +1,29 @@
 import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 
-const BillModal = ({ setBillModal, date, refetch }) => {
+const BillModal = ({ setBillModal }) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const onSubmit = async data => {
-        data.amount = "$" + data.amount
-        console.log(data);
+    const onSubmit = async formData => {
+        formData.amount = "$" + formData.amount
+        console.log(formData);
 
-        fetch('http://localhost:5000/add-billing', {
+        fetch('https://flannel-beaver-14431.herokuapp.com/add-billing', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(formData)
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 if (data.success) {
-                    toast('Appionment Booked')
-                    refetch()
+                    toast('New Bill Added')
                     setBillModal(false);
                 }
                 else {
-                    toast.error('Alrady have an appionment ' + data.exists?.date + "  " + data.exists?.slot)
+                    toast.error('Something worng!')
                 }
             })
     }
@@ -116,12 +116,12 @@ const BillModal = ({ setBillModal, date, refetch }) => {
                                     value: true,
                                     message: 'Amount is Required'
                                 }
-                                
+
                             })}
                         />
                         <label className="label">
                             {errors.amount?.type === 'required' && <span className="label-text-alt text-red-500">{errors.amount.message}</span>}
-                            
+
 
                         </label>
                     </div>

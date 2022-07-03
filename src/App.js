@@ -4,6 +4,7 @@ import Home from './Pages/Home/Home';
 import { Route, Routes } from 'react-router-dom';
 import BillingPage from './Pages/DashBoard/BillingPage';
 import Layout from './Layout/Layout';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           </Layout>
         }></Route>
       </Routes>
+
+      <ToastContainer />
     </div>
   );
 }
